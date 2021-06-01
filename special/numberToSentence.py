@@ -4,29 +4,25 @@ mapper = {'2': 'a', '22': 'b', '222': 'c', '3': 'd', '33': 'e', '333': 'f', '4':
           '66': 'n', '666': 'o', '7': 'p', '77': 'q', '777': 'r', '7777': 's', '8': 't', '88': 'u', '888': 'v', '9': 'w', '99': 'x', '999': 'y', '9999': 'z', '0': ' '}
 
 
-def generateAllSentences(start: int, end: int, nums: str, lst: list):
-    if(start == end):
-        return list(set(lst))
-    for i in range(len(lst)):
-        tmp = lst[i]
-        if(start >= 2 and nums[start-1] == nums[start] and nums[start-2] == nums[start]):
-            if(tmp[-1] == mapper[nums[start-1]+nums[start]]):
-                lst += [tmp[:-1]+mapper[nums[start-2]+nums[start-1]+nums[start]]]
-            if(tmp[-1] == mapper[nums[start]] and tmp[-2] == mapper[nums[start]]):
-                lst += [tmp[:-2]+mapper[nums[start-2]+nums[start-1]+nums[start]]]
-        if(start >= 1 and nums[start] == nums[start-1]):
-            if(tmp[-1] == mapper[nums[start]]):
-                lst += [tmp[:-1]+mapper[nums[start-1]+nums[start]]]
-        lst[i] += mapper[nums[start]]
-    generateAllSentences(start+1, end, nums, lst)
-
-
 def numberToSentence(nums: str):
     start = 0
     end = len(nums)
     lst = ['']
-    generateAllSentences(start, end, nums, lst)
+    while(start < end):
+        for i in range(len(lst)):
+            tmp = lst[i]
+            if(start >= 2 and nums[start-1] == nums[start] and nums[start-2] == nums[start]):
+                if(tmp[-1] == mapper[nums[start]] and tmp[-2] == mapper[nums[start]]):
+                    lst += [tmp[:-2]+mapper[nums[start-2] +
+                                            nums[start-1]+nums[start]]]
+            if(start >= 1 and nums[start] == nums[start-1]):
+                if(tmp[-1] == mapper[nums[start]]):
+                    lst += [tmp[:-1]+mapper[nums[start-1]+nums[start]]]
+            lst[i] += mapper[nums[start]]
+        start += 1
+    # print(lst)
     possibleSents = list(set(lst))
+    # print(possibleSents)
     d = dict()
     maxscore = 0
     for s in possibleSents:
