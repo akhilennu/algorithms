@@ -51,11 +51,11 @@ def numberToSentence(nums: str):
 
 
 def numberToSentenceOptimized(sent: str):
-    d = []
+    d = dict()
     for word in sent.split('0'):
-        d.append({word: str(numberToSentence(word))})
+        d.update({word: str(numberToSentence(word))})
     print(d)
-    df = pd.DataFrame(d)
+    df = pd.DataFrame.from_dict(d, orient='index')
     df.to_csv(sent+'.csv')
     print('exported the data to ', sent, 'csv file')
 
