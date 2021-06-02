@@ -60,11 +60,11 @@ def numberToSentenceOptimized(sent: str):
 
 
 sent = str(input('enter a number pad format: '))
-start_time = time.time()
-o = numberToSentence(sent)
-print(o)
+# start_time = time.time()
+# o = numberToSentence(sent)
+# print(o)
 start_opt_time = time.time()
-print("--- %s seconds ---" % (start_opt_time - start_time))
+# print("--- %s seconds ---" % (start_opt_time - start_time))
 
-# numberToSentenceOptimized(sent)
-# print("--- %s seconds ---" % (time.time() - start_opt_time))
+numberToSentenceOptimized(sent)
+print("--- %s seconds ---" % (time.time() - start_opt_time))
