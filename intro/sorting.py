@@ -7,7 +7,18 @@ def selectionSort(l):
         for j in range(i, len(l)):
             if(l[i] > l[j]):
                 l[i], l[j] = l[j], l[i]
-    print(l)
+    return l
 
 
-selectionSort(l)
+def quicksort(l):
+    if(len(l) < 2):
+        return l
+    pivot = l[0]
+    # <= to handle if the pivot number is duplicate.
+    # Since we're looping on array excluding 1st element we wont get the pivot here
+    less = [i for i in l[1:] if i <= pivot]
+    greater = [i for i in l[1:] if i > pivot]
+    return quicksort(less) + [pivot] + quicksort(greater)
+
+
+print(quicksort(l))
